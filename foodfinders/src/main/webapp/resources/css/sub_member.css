@@ -1,0 +1,493 @@
+@charset "utf-8";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    color: #222;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+ul, ol{
+    list-style: none;
+}
+
+img{
+    width: 100%;
+    height: auto;
+    vertical-align: top;
+    border: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+input{
+    font-family: 'Noto Sans KR', sans-serif;
+    vertical-align: top;
+    /* 인라인 블럭*/
+}
+
+.hide{
+    display: block;
+    /* span 태그로 넣었을 때 */
+    position: absolute;
+    top: -99999px;
+    left: -99999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+fieldset{
+    border: 0;
+}
+
+legend{
+    display: none;
+}
+
+/* reset end */
+
+#wrap{
+    width: 100%;
+    min-width: 1240px;
+    position: relative;
+}
+
+/* content */
+
+.content{
+    background-color: rgb(248, 248, 248);
+    height: 30px;
+}
+
+.contentIn{
+    width: 1240px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 auto;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+
+.content ul{
+    display: flex;
+    justify-content: left;
+}
+
+.content li::before{
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 10px;
+    margin: 0 10px;
+    background-color: #aaa;
+}
+
+.content li:first-child::before{
+    display: none;
+}
+
+.content li a{
+    color: #666;
+}
+
+.content .favorites a{
+    display: block;
+    padding-left: 15px;
+    background-image: url(../img/star.png);
+    background-size: 10px auto;
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+/* header */
+
+#header{
+    position: relative;
+    height: 90px;
+}
+
+.headerIn{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1240px;
+    height: 90px;
+    margin: 0 auto;
+}
+
+.logo a{
+    display: block;
+    width: 145px;
+    height: 64px;
+    background-image: url(../img/h_logo7.gif);
+    background-repeat: no-repeat;
+    background-size: 145px auto;
+    text-indent: -99999px;
+}
+
+.headerIn .loginName{
+	position: absolute;
+	bottom: 0;
+	right: 25px;
+	font-size: 15px
+}
+
+.headerIn .loginName span{
+	color:#ff623e;
+	font-weight: 700;
+}
+
+.headerIn .adminPage{
+	position: absolute;
+	bottom: 30px;
+	right: 25px;
+	border-bottom: 1px solid blue;
+}
+
+.headerIn .adminPage a{
+	color: #333;
+	font-size: 15px
+}
+
+/* gnb(sticky) */
+
+.gnb{
+    position: sticky;
+    top: 0;
+    height: 48px;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    z-index: 500;
+    box-shadow: 0 5px 10px -5px rgba(151, 151, 151, 0.3);
+}
+
+.g_sub{
+    position: absolute;
+    top: 49px;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    display: none;
+}
+
+.g_sub>ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 1240px;
+    margin: 0 auto;
+    padding: 0px 10px;
+    box-sizing: border-box;
+}
+
+.g_sub>ul>li{
+    width: 20%;
+    /* background-color: antiquewhite; */
+    /* text-align: center; */
+    margin-bottom: 10px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.g_sub>ul>li>a{
+    display: inline-block;
+    padding: 10px 30px;
+    border-bottom: 2px solid #444;
+    color: #333;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.g_list li>a{
+    display: block;
+    margin: 10px 0;
+    color: #555;
+    font-size: 14px;
+}
+
+.g_list li>a:hover{
+    color: #ff623e;
+}
+
+.gnb_in{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 1240px;
+    height: 48px;
+    margin: 0 auto;
+    padding-left: 20px;
+    box-sizing: border-box;
+    line-height: 48px;
+}
+
+.g_menu ul{
+    display: flex;
+}
+
+.g_menu li{
+    margin-right: 40px;
+}
+
+.g_menu li a{
+    color: #333;
+    font-size: 17px;
+    font-weight: 700;
+    transition: color 0.3s linear;
+}
+
+.g_menu li a:hover{
+    color: #ff623e;
+}
+
+.g_menu .menu .menu_box{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 16px;
+}
+
+.g_menu .menu .menu_box span{
+    display: block;
+    width: 20px;
+    height: 2px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    background-color: #333;
+}
+
+.g_menu .menu .menu_box span:last-child{
+    margin-bottom: 0;
+}
+
+.search{
+    position: absolute;
+    right: 180px;
+    top: 7px;
+    width: 250px;
+    height: 30px;
+    padding-left: 10px;
+    overflow: hidden;
+    border: 2px solid #ff623e;
+    border-radius: 30px;
+}
+
+.h_input_text{
+    width: 210px;
+    height: 30px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    border: 0;
+    color: #999;
+}
+
+.h_submit{
+    width: 30px;
+    height: 26px;
+    border: 0;
+    background-color: transparent;
+    background-size: 17px auto;
+    background-image: url(../img/search-btn-icon.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.util{
+    position: absolute;
+    bottom: 4px;
+    right: 20px;
+}
+
+.util ul{
+    display: flex;
+}
+
+.util li{
+    margin-left: 10px;
+}
+
+.util li a{
+    display: block;
+    width: 40px;
+    height: 40px;
+    box-sizing: border-box;
+    background-size: 28px auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-indent: -99999px;
+    text-align: center;
+    color: #777;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.util .h_login a{
+    background-image: url(../img/h_login.png);
+}
+.util .h_delivery a{
+    background-image: url(../img/h_delivery.png);
+}
+.util .h_cart a{
+    background-image: url(../img/h_cart.png);
+}
+
+/* 본문 시작 */
+
+.main_in{
+    position: relative;
+    width: 1240px;
+    margin: 0 auto;
+    padding: 20px 0 40px 0;
+}
+
+.home ol{
+    display: flex;
+    margin: 20px 0 40px 20px;
+}
+
+.home li::before{
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #999;
+    border-bottom: 2px solid #999;
+    transform: rotate(-45deg);
+    margin-left: 6px;
+    margin-right: 10px;
+}
+
+.home li:first-child::before{
+    display: none;
+}
+
+.member_title{
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.member_title h1{
+    margin-bottom: 5px;
+    font-size: 32px;
+    line-height: 1.3em;
+    font-weight: 700;
+}
+
+.member_title p{
+    color: #999;
+    /* background-color: #333; */
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 30px;
+}
+
+.member_box{
+    position: relative;
+    width: 600px;
+    margin: 0 auto;
+}
+
+.member_alert{
+    position: absolute;
+    top: 15px;
+    right: 0px;
+    font-size: 15px;
+    line-height: 15px;
+}
+
+.member_alert::before{
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    vertical-align: top;
+    margin-top: 5px;
+    margin-right: 5px;
+    background-color: #ff623e;
+}
+
+.member_box ul li label{
+    display: block;
+    height: 50px;
+    font-size: 20px;
+    line-height: 50px;
+    font-weight: 500;
+}
+
+.member_box ul li label::before{
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    vertical-align: top;
+    margin-top: 22px;
+    margin-right: 5px;
+    background-color: #ff623e;
+}
+
+.member_box ul li label.no::before{
+    display: none;
+}
+
+.member_box ul li input{
+    display: block;
+    width: 568px;
+    height: 50px;
+    border: 1px solid #aaa;
+    font-size: 18px;
+    border-radius: 20px;
+    padding-left: 30px;
+    margin-bottom: 20px;
+}
+
+.member_box ul li select{
+    display: block;
+    width: 598px;
+    height: 50px;
+    border: 1px solid #aaa;
+    font-size: 18px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.member_box ul .birth div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.member_box ul .birth .ymd{
+    display: inline-block;
+    width: 160px;
+}
+
+.member_box ul .birth #month{
+    width: 180px;
+    height: 54px;
+}
+
+.member_box .member_btn{
+    display: block;
+    width: 180px;
+    height: 50px;
+    margin: 60px auto 0;
+    font-size: 20px;
+    background-color: #fa7456;
+    border: none;
+    color: #fff;
+    box-shadow: 3px 3px 5px #bbb;
+}
+
+.member_box ul li p{
+    color: #fa7456;
+}

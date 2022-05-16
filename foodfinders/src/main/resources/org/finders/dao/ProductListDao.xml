@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.finders.dao.ProductListDao">
+	<!--  <select id="ProductList" resultType="org.finders.model.ProductListDTO">
+		select *
+		from mas_product
+		where pcategory like concat('%',#{pcategory},'%')
+	</select> -->
+	
+	<insert id="ProductWrite">
+		<selectKey keyProperty="pno" resultType="int" order="BEFORE">
+ 			select max(pno)+1 pno from mas_product
+ 		</selectKey>
+		 	
+		insert into mas_product(pno, pname, pprice,  pcategory, pmaincategory, pcontent)
+		values(#{pno}, #{pname}, #{pprice}, #{pcategory}, #{pmaincategory}, #{pcontent})
+	</insert>
+	
+	<update id="ProductUpdate">
+		update mas_product
+		set pname=#{pname},
+			pprice=#{pprice},
+			pcategory=#{pcategory},
+			pmaincategory=#{pmaincategory},
+			pcontent=#{pcontent}
+		where pno = #{pno};
+		update mas_shopping
+		set pname=#{pname},
+			pprice=#{pprice}
+ 		where pno = #{pno};
+	</update>
+	
+	<delete id="ProductDelete">
+		delete from mas_product where pno = #{pno}
+	</delete>
+
+	<select id="ProductList" resultType="org.finders.model.ProductListDTO">
+ 		<if test = "keyword == null">
+ 			select *
+			from(
+				select @rownum:=@rownum+1 as rownum, p.*
+				from (select @rownum:=0) as tmp, mas_product p
+			 	where pcategory like concat('%',#{pcategory},'%') <!-- concat: 문자열을 이어주는 자바메소드 -->			
+				order by pno desc
+			    ) as productList
+		<![CDATA[
+			where rownum > (#{pagenum} - 1 ) * #{amount} and rownum <= #{pagenum} * 20
+		]]>
+ 		</if>
+ 		<if test = "keyword != null">
+ 			select *
+			from(
+				select @rownum:=@rownum+1 as rownum, p.*
+				from (select @rownum:=0) as tmp, mas_product p
+			 	where pname like concat('%',#{keyword},'%') <!-- concat: 문자열을 이어주는 자바메소드 -->
+			 	OR pcategory like concat('%',#{keyword},'%')	
+				order by pno desc
+			    ) as productList
+		<![CDATA[
+			where rownum > (#{pagenum} - 1 ) * #{amount} and rownum <= #{pagenum} * 20
+		]]>
+ 		</if>
+ 		
+ 	</select>
+	<select id="getTotalCount" resultType="int">
+		<if test = "keyword == null">
+	 		select count(*)
+	 		from mas_product
+		 	where pcategory like concat('%',#{pcategory},'%') <!-- concat: 문자열을 이어주는 자바메소드 -->
+	 	</if>
+	 	<if test = "keyword != null">
+		 	select count(*)
+	 		from mas_product
+		 	where pname like concat('%',#{keyword},'%') <!-- concat: 문자열을 이어주는 자바메소드 -->
+		 	OR pcategory like concat('%',#{keyword},'%')
+	 	</if>
+ 	</select>
+ 	
+ 	<select id="ProductDetail" resultType="org.finders.model.ProductListDTO">
+ 		select * from mas_product where pno=#{pno}
+ 	</select>
+ 	
+ 	<select id="attachList" resultType="org.finders.model.AttachFileDTO">
+ 		select * from mas_attach where pno=#{pno}
+ 	</select>
+ 	
+ 	<insert id="ProductShopping">
+ 		insert into mas_shopping(id, address, pno, pname, pprice, pcount)
+ 		values(#{id}, #{address}, #{pno}, #{pname}, #{pprice}, #{pcount})
+ 	</insert>
+ 	
+ 	<select id="ProductShoppingList" resultType="org.finders.model.ShoppingDTO">
+ 		select *
+ 		from mas_shopping
+ 		where id = #{id}
+ 	</select>
+ 	
+ 	<delete id="ProductShoppingDelete">
+ 		delete from mas_shopping where sno=#{sno}
+ 	</delete>
+ 	
+ 	<select id="ProductAdmin" resultType="org.finders.model.ProductListDTO">
+ 		select *
+ 		from mas_product
+ 	</select>
+</mapper>
